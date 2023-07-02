@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post">
+    <a href="{% url 'my_hotel:main' %}" class="logo">HOTEL</a>
+    <h1>{{ room.name }}</h1>
+    <p>{{ room.description }}</p>
+    <p>Цена: {{ room.price }}</p>
+    <p>Вместимость: {{ room.capacity }}</p>
+    {% if room.preview %}
+        <p><img src="{{ room.preview.url }}" alt="Preview Image" style="max-width: 10%; max-height: 20%;"></p>
+    {% endif %}
+  <button type="submit">Забронировать</button>
+</form>
+</body>
+</html>

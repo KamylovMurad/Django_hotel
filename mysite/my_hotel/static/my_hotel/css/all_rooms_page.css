@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+  display: flex;
+  margin-left: 30px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 800;
+    color: black;
+    transition: .5s;
+}
+
+div {
+  display: inline-block;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  width: 200px;
+}
+
+.menu {
+    margin-left: 300px;
+}
+
+.room-block {
+  border: 2px solid red;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: block;
+  background: #f2f2f2;
+}
+
+
+form label
+form select,
+form input,
+form button {
+  display: inline-block;
+  vertical-align: middle;
+  width: 320px;
+}
+
+
+form input[type="number"],
+form input[type="date"],
+form input[type="text"] {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 7px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 135px;
+}
+
+.categories {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 7px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 150px;
+}
+
+
+
+form button {
+  width: 170px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+
+p a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}

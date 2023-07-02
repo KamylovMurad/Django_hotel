@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'my_hotel/css/login.css' %}">
+</head>
+<body>
+<form method="post" action="{% url 'my_hotel:login' %}">
+  {% csrf_token %}
+    <p>
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username">
+    </p>
+    <p>
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password">
+    </p>
+
+  <p>
+      <input type="submit" value="Login">
+      <input type="submit" value="Register" formaction="{% url 'my_hotel:register' %}">
+  </p>
+</form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% extends 'my_hotel/base.html' %}
+
+{% block title %}
+  Registration
+{% endblock %}
+
+{% block styles %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'my_hotel/css/profile.css' %}">
+{% endblock %}
+
+{% block body %}
+<a href="{% url 'my_hotel:main' %}" class="logo">HOTEL</a>
+<h1>Профиль пользователя</h1>
+<p>Логин: {{ profile.user.username }}</p>
+<p>Имя: {{ profile.user.first_name }}</p>
+<p>Фамилия: {{ profile.user.last_name }}</p>
+<p>Email: {{ profile.user.email }}</p>
+<p>Возраст: {{ profile.user.age }}</p>
+<p>Телефон: {{ profile.user.phone }}</p>
+<br>
+
+{% for booking in bookings %}
+<ul>
+  <li>
+    <p>Отель: {{ booking.room.name }}</p>
+    <p>Вместимость: {{ booking.room.capacity }}</p>
+    <p>Дата заезда: {{ booking.start_date }}</p>
+    <p>Дата выезда: {{ booking.end_date }}</p>
+    <p>Cтатуc бронирования: {{ booking.status }}</p>
+    {% if booking.status == 'booked' %}
+    <form method="POST">
+    {% csrf_token %}
+    <button id="cancel-booking-btn" formaction="{% url 'my_hotel:cancel_booking' booking.id %}">Отменить бронирование</button>
+    {% endif %}
+    </form>
+  </li>
+</ul>
+{% empty %}
+<p>Бронирования отсутствуют</p>
+{% endfor %}
+<a href="{% url 'my_hotel:logout' %}">Выход</a>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'my_hotel/css/main_page_style.css' %}">
+</head>
+<body>
+    <header>
+      <a href="{% url 'my_hotel:main' %}" class="logo">HOTEL</a>
+      <nav>
+        <ul>
+          <li><a href="{% url 'my_hotel:rooms' %}">Номера</a>
+          <li><a href="#">Контакты</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'my_hotel:profile' %}">{{ user.username }}</a></li>
+            {% else %}
+            <li><a href="{% url 'my_hotel:login' %}">Вход/Регистрация</a></li>
+            {% endif %}
+        </ul>
+      </nav>
+    </header>
+    </div>
+    <div class='overlay'>
+        <div class="text">
+            <h2>Популярное:</h2>
+            <br>
+            <ul>
+            {% for popular in popular_rooms %}
+            <li><p>Номер: <a href="{% url 'my_hotel:room_detail' pk=popular.pk %}" style="color:orange">{{ popular.name }}</a></p>
+            <p>Стоимость: {{ popular.price }}</p>
+            <p>Вместимость: {{ popular.capacity }}</p>
+            </li>
+            <br>
+            {% empty %}
+                <div>Номера отсутствуют</div>
+            {% endfor %}
+            </ul>
+            </div>
+    </div>
+</body>
+</html>

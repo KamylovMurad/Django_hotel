@@ -1,0 +1,17 @@
+{% extends 'my_hotel/base.html' %}
+
+{% block title %}
+  Review
+{% endblock %}
+{% block styles %}
+{% endblock %}
+{% block body %}
+  <div class="registration-form">
+    <h1>Отзыв</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+       <button  type="submit">Создать</button>
+    </form>
+  </div>
+{% endblock %}

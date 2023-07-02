@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'my_hotel/css/room_detail.css' %}">
+</head>
+<body>
+    <a href="{% url 'my_hotel:main' %}" class="logo">HOTEL</a>
+    <h1>{{ room.name }}</h1>
+    <p>{{ room.description }}</p>
+    <p>Цена: {{ room.price }}</p>
+    <p>Вместимость: {{ room.capacity }}</p>
+    {% if room.preview %}
+        <p><img src="{{ room.preview.url }}" alt="Preview Image" style="max-width: 10%; max-height: 20%;"></p>
+    {% endif %}
+    <form method="POST">
+      {% csrf_token %}
+      <p>Дата заезда: <input type="date" name="start_date" value="{{ form.start_date.value }}"></p>
+      <p>Дата выезда: <input type="date" name="end_date" value="{{ form.end_date.value }}"></p>
+      <button type="submit">Забронировать</button>
+    </form>
+    {% if form.errors %}
+    <ul>
+    {% for field_errors in form.errors.values %}
+        {% for error in field_errors %}
+            {% if error != '__all__' %}
+                <li style="color: red">{{ error }}</li>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+<!-- Вывод отзывов -->
+<h2>Отзывы:</h2>
+    <form method="GET">
+      {% csrf_token %}
+     <button formaction="{% url 'my_hotel:review' room.id %}">Оставить отзыв</button>
+    </form>
+<ul>
+  {% for review in reviews %}
+    <li>
+      <p>Автор: {{ review.author }}</p>
+      <p>Текст: {{ review.comment }}</p>
+      <p>Оценка: {{ review.rating }}</p>
+      <p>Дата: {{ review.created_at }}</p>
+    </li>
+  {% empty %}
+    <li>Нет отзывов</li>
+  {% endfor %}
+</ul>
+</body>
+</html>

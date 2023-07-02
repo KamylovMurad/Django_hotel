@@ -1,0 +1,40 @@
+    .registration-form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .registration-form h1 {
+      text-align: center;
+    }
+
+    .registration-form label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .registration-form input[type="text"],
+    .registration-form input[type="email"],
+    .registration-form input[type="password"] {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .registration-form .error-message {
+      color: red;
+      margin-top: 5px;
+    }
+
+    .registration-form input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }

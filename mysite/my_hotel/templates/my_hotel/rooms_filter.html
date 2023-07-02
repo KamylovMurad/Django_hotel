@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All rooms</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'my_hotel/css/all_rooms_page.css' %}">
+</head>
+<body>
+<div>
+     <a href="{% url 'my_hotel:main' %}" class="logo">HOTEL</a>
+
+    {% for room in rooms %}
+    <div class="room-block">
+        <p><a href="{% url 'my_hotel:room_detail' pk=room.pk %}">{{ room.name }}</a></p>
+        <p>{{ room.price }}</p>
+        <p>{{ room.capacity }}</p>
+        {% if room.preview %}
+            <p><a href="{% url 'my_hotel:room_detail' pk=room.pk %}"><img src="{{ room.preview.url }}" alt="Preview Image" style="max-width: 10%; max-height: 20%;"></a></p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+</div>
+
+<div class="menu">
+<form method="POST">
+    {% csrf_token %}
+<label for="id_category">Категория:</label>
+<select class="categories" name="category" id="id_category">
+    <option value="" selected>Все</option>
+    {% for type in types %}
+        <option value="{{ type }}">{{ type }}</option>
+    {% endfor %}
+</select>
+<label for="id_capacity">Вместимость:</label>
+<select class="categories" name="capacity" id="id_capacity">
+    <option value="" selected>Все</option>
+    {% for cap in capacity %}
+        <option value="{{ cap }}">{{ cap }}</option>
+    {% endfor %}
+</select>
+<label for="min_price">От:</label>
+<input type="number" id="min_price" name="min_price" min="0" max="9999999" placeholder="...">
+<label for="max_price">До:</label>
+<input type="number" id="max_price" name="max_price" min="0" max="9999999" placeholder="...">
+
+<label for="id_sort_by">Сортировать по:</label>
+<select class="categories" name="sort_by" id="id_sort_by">
+    <option value="-created_at">Новые</option>
+    <option value="price">Цена (по возрастанию)</option>
+    <option value="-price">Цена (по убыванию)</option>
+    <option value="capacity">Количество мест (по возрастанию)</option>
+    <option value="-capacity">Количество мест (по убыванию)</option>
+</select>
+
+<label for="start_date">Дата заезда:</label>
+<input type="date" id="start_date" name="start_date">
+
+<label for="end_date">Дата выезда:</label>
+<input type="date" id="end_date" name="end_date">
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+<button type="submit">Применить фильтры</button>
+<input type="text" name="search" placeholder="Поиск...">
+<button type="submit">Найти</button>
+</form>
+</div>
+</body>
+</html>
