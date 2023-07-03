@@ -1,0 +1,1 @@
+[{"model": "my_hotel.profile", "pk": 1, "fields": {"user": 2, "age": null, "phone_number": null, "birth_date": null, "preview": ""}}, {"model": "my_hotel.profile", "pk": 4, "fields": {"user": 5, "age": null, "phone_number": null, "birth_date": null, "preview": ""}}]
