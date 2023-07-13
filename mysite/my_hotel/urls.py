@@ -1,5 +1,5 @@
 from django.urls import path, include
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LogoutView
 from rest_framework.routers import DefaultRouter
 from .views import (
   main_page,

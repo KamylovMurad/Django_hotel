@@ -1,11 +1,10 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import DetailView, CreateView
 from .models import Room, Booking, Profile, Review
 from .forms import CustomUserCreationForm, BookingForm, ReviewForm
 from django.db.models import Q
@@ -119,7 +118,10 @@ def rooms_filter(request: HttpRequest) -> HttpResponse:
                 error_message = "Укажите корректную дату"
 
             else:
-                reservations = Booking.objects.filter(start_date__lte=end_date, end_date__gte=start_date)
+                reservations = Booking.objects.filter(
+                    start_date__lte=end_date,
+                    end_date__gte=start_date
+                )
                 reservations = reservations.filter(
                     Q(status='booked') | Q(status='confirmed')
                 )
@@ -245,7 +247,8 @@ class UserProfileDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        bookings = Booking.objects.filter(user=self.request.user).order_by('-created_at')
+        bookings = Booking.objects.filter(
+            user=self.request.user).order_by('-created_at')
         context['bookings'] = bookings
         return context
 
